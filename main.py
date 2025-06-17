@@ -1,4 +1,4 @@
-2pac, [17.06.2025 17:43]
+
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 import logging
