@@ -153,5 +153,5 @@ async def admin_send_course(message: types.Message):
         await message.reply("⛔ У вас нет доступа к этой команде.")
 
 # --- ЗАПУСК ---
-if name == "__main__":
+if __name__ == "__main__":
     executor.start_polling(dp, skip_updates=True)
