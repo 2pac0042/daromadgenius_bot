@@ -1,4 +1,3 @@
-
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 import logging
@@ -110,8 +109,6 @@ async def uz_strategiyalar(message: types.Message):
 async def uz_indicators(message: types.Message):
     await message.answer(
         "📊 Indikator: 250,000 so'm\n📌 Chekni yuboring: @forex0042",
-
-2pac, [17.06.2025 17:43]
 reply_markup=product_buttons_uz
     )
 
@@ -151,7 +148,3 @@ async def admin_send_course(message: types.Message):
         await bot.send_document(chat_id=message.chat.id, document="YOUR_FILE_ID_HERE")
     else:
         await message.reply("⛔ У вас нет доступа к этой команде.")
-
-# --- ЗАПУСК ---
-if __name__ == "__main__":
-    executor.start_polling(dp, skip_updates=True)
