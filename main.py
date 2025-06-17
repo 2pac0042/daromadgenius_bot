@@ -1,4 +1,3 @@
-2pac, [17.06.2025 18:13]
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 import logging
@@ -57,7 +56,6 @@ async def ru_strategies(message: types.Message):
 @dp.message_handler(lambda m: m.text == "📊 Индикаторы")
 async def ru_indicators(message: types.Message):
     await message.answer("📊 Индикатор: 25 $\n📌 Чек отправьте: @forex0042", reply_markup=product_buttons_ru)
-
 # UZ товары
 @dp.message_handler(lambda m: m.text == "🎓 Kurslar")
 async def uz_courses(message: types.Message):
@@ -85,7 +83,6 @@ async def buy_ru(callback: types.CallbackQuery):
     await callback.answer()
     await callback.message.answer("💳 Отправьте чек в @forex0042")
 @dp.callback_query_handler(lambda c: c.
-2pac, [17.06.2025 18:13]
 data == "back_ru")
 async def back_ru(callback: types.CallbackQuery):
     await callback.answer()
@@ -111,3 +108,4 @@ async def admin_send_course(message: types.Message):
 # Запуск
 if __name__ == "__main__":
     executor.start_polling(dp, skip_updates=True)
+
