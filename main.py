@@ -1,3 +1,4 @@
+
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 import logging
@@ -46,13 +47,12 @@ async def ru_courses(message: types.Message):
         "🔹 BlackRock и Vanguard\n"
         "🔹 Тактики, психология, риск-менеджмент\n"
         "🔹 Видеоуроки + PDF\n\n"
-        "💰 700 $\n📌 Чек отправьте: @forex0042",
+        "💰 270 $\n📌 Чек отправьте: @forex0042",
         reply_markup=product_buttons_ru
     )
 @dp.message_handler(lambda m: m.text == "📈 Стратегии")
 async def ru_strategies(message: types.Message):
-    await message.answer("📈 Стратегия: 35 $\n📌 Чек отправьте: @forex0042", reply_markup=product_buttons_ru)
-
+    await message.answer("📈 Стратегия: 35 $\n📌 Чек отправьте: @forex0042 ", reply_markup=product_buttons_ru)
 @dp.message_handler(lambda m: m.text == "📊 Индикаторы")
 async def ru_indicators(message: types.Message):
     await message.answer("📊 Индикатор: 25 $\n📌 Чек отправьте: @forex0042", reply_markup=product_buttons_ru)
@@ -106,6 +106,5 @@ async def admin_send_course(message: types.Message):
     else:
         await message.reply("⛔ У вас нет доступа к этой команде.")
 # Запуск
-if __name__ == "__main__":
+if name == "__main__":
     executor.start_polling(dp, skip_updates=True)
-
