@@ -171,4 +171,44 @@ async def paid_confirm(callback: types.CallbackQuery):
 # Запуск
 if __name__ == "__main__":
     executor.start_polling(dp, skip_updates=True)
+# О ПРОДУКТЕ
+@dp.message_handler(lambda m: m.text in ["📦 О продукте", "📦 Mahsulot haqida"])
+async def about_product(message: types.Message):
+    text = (
+        "💼 <b>Что ты получаешь:</b>\n\n"
+        "✅ Сигнальный индикатор (работает в TradingView)\n"
+        "✅ Готовая стратегия\n"
+        "✅ Видео‑курс от профи из США, Дубая, Малайзии\n"
+        "✅ Постоянная поддержка 24/7\n\n"
+        "🔥 <b>Ранее: 1300$</b>\n"
+        "💰 <b>Сейчас: 290$</b>\n\n"
+        "🚀 Получи доступ: @daromadgeniusbot"
+    )
+    await message.answer(text, parse_mode="HTML")
 
+
+# ПАРТНЁРКА
+@dp.message_handler(lambda m: m.text in ["💼 Партнёрка", "💼 Hamkorlik"])
+async def partner_program(message: types.Message):
+    text = (
+        "🤝 <b>Партнёрская программа:</b>\n\n"
+        "🎁 Пригласи 3 друзей — получи индикатор бесплатно\n"
+        "🔗 Уникальная реферальная ссылка (скоро будет)\n"
+        "📩 Связь: @forex0042\n\n"
+        "📊 Статус: Ваша заявка обрабатывается..."
+    )
+    await message.answer(text, parse_mode="HTML")
+
+
+# НАСТРОЙКИ
+@dp.message_handler(lambda m: m.text in ["🛠 Настройки", "🛠 Sozlamalar"])
+async def settings(message: types.Message):
+    user_id = message.from_user.id
+    text = (
+        f"⚙️ <b>Настройки</b>\n\n"
+        f"🆔 Ваш Telegram ID: <code>{user_id}</code>\n"
+        f"🌐 Язык: Русский\n"
+        f"📎 Версия бота: v1.0\n\n"
+        f"💬 Поддержка: @forex0042"
+    )
+    await message.answer(text, parse_mode="HTML")
