@@ -2,48 +2,43 @@ from aiogram import Bot, Dispatcher, executor, types
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from datetime import datetime
 import logging
-import os
 
-API_TOKEN = os.getenv("7481276211:AAEcf-ZJGUvmQxb99FpN_9SOQpxfCwwzMHw")
-ADMIN_ID = 6846748073  # Замени на свой Telegram ID
-logging.basicConfig(level=logging.INFO)
+# 🔑 Вставь сюда свой токен
+API_TOKEN = "7481276211:AAEcf-ZJGUvmQxb99FpN_9SOQpxfCwwzMHw"
+ADMIN_ID = 6846748073  # Заменить на свой Telegram ID
 
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot)
+logging.basicConfig(level=logging.INFO)
 
-# Языковая клавиатура
+# 🔤 Выбор языка
 LANGUAGE_KEYBOARD = types.ReplyKeyboardMarkup(resize_keyboard=True)
 LANGUAGE_KEYBOARD.add("🇷🇺 Русский", "🇺🇿 O'zbekcha")
 
-# Главное меню RU
+# 🇷🇺 Меню
 MENU_RU = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
 MENU_RU.add(
     "📊 Индикаторы", "📈 Стратегии",
     "🎓 Курсы", "💬 Поддержка",
     "📦 О продукте", "💳 Оплатить",
-    "🛠 Настройки", "💼 Партнёрка",
-    "🎥 Видео", "❓ Вопросы"
+    "🛠 Настройки", "💼 Партнёрка"
 )
 
-# Главное меню UZ
+# 🇺🇿 Меню
 MENU_UZ = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
 MENU_UZ.add(
     "📊 Indikatorlar", "📈 Strategiyalar",
     "🎓 Kurslar", "💬 Yordam",
     "📦 Mahsulot haqida", "💳 To‘lov",
-    "🛠 Sozlamalar", "💼 Hamkorlik",
-    "🎥 Video", "❓ Savollar"
+    "🛠 Sozlamalar", "💼 Hamkorlik"
 )
 
-# Инлайн-кнопки RU
-product_buttons_ru = InlineKeyboardMarkup(row_width=2)
-product_buttons_ru.add(
+# 📦 Инлайн кнопки для покупки
+product_buttons_ru = InlineKeyboardMarkup(row_width=2).add(
     InlineKeyboardButton("🛒 Купить", callback_data="buy_ru"),
     InlineKeyboardButton("🔙 Назад", callback_data="back_ru")
 )
-
-product_buttons_uz = InlineKeyboardMarkup(row_width=2)
-product_buttons_uz.add(
+product_buttons_uz = InlineKeyboardMarkup(row_width=2).add(
     InlineKeyboardButton("🛒 Xarid qilish", callback_data="buy_uz"),
     InlineKeyboardButton("🔙 Orqaga", callback_data="back_uz")
 )
@@ -53,6 +48,7 @@ product_buttons_uz.add(
 async def start(message: types.Message):
     await message.answer("👋 Добро пожаловать! / Xush kelibsiz!\nВыберите язык:", reply_markup=LANGUAGE_KEYBOARD)
 
+# Выбор языка
 @dp.message_handler(lambda m: m.text == "🇷🇺 Русский")
 async def ru_menu(message: types.Message):
     await message.answer("🇷🇺 Меню:", reply_markup=MENU_RU)
@@ -61,88 +57,100 @@ async def ru_menu(message: types.Message):
 async def uz_menu(message: types.Message):
     await message.answer("🇺🇿 Menyu:", reply_markup=MENU_UZ)
 
-# Категории RU
-@dp.message_handler(lambda m: m.text == "📊 Индикаторы")
-async def indicators_ru(message: types.Message):
-    await message.answer("📊 Индикатор: 25 $\n📌 Чек отправьте: @forex0042", reply_markup=product_buttons_ru)
+# Индикаторы / Стратегии
+@dp.message_handler(lambda m: m.text in ["📊 Индикаторы", "📊 Indikatorlar"])
+async def indicators(message: types.Message):
+    await message.answer("📊 Индикатор: 25$\n📎 Чек: @forex0042", reply_markup=product_buttons_ru if "Русский" in message.text else product_buttons_uz)
 
-@dp.message_handler(lambda m: m.text == "📈 Стратегии")
-async def strategies_ru(message: types.Message):
-    await message.answer("📈 Стратегия: 35 $\n📌 Чек отправьте: @forex0042", reply_markup=product_buttons_ru)
+@dp.message_handler(lambda m: m.text in ["📈 Стратегии", "📈 Strategiyalar"])
+async def strategies(message: types.Message):
+    await message.answer("📈 Стратегия: 35$\n📎 Чек: @forex0042", reply_markup=product_buttons_ru if "Русский" in message.text else product_buttons_uz)
 
-@dp.message_handler(lambda m: m.text == "🎓 Курсы")
-async def courses_ru(message: types.Message):
-    await message.answer("🎓 Курс: 290 $\n📌 Чек отправьте: @forex0042", reply_markup=product_buttons_ru)
-
-# Категории UZ
-@dp.message_handler(lambda m: m.text == "📊 Indikatorlar")
-async def indicators_uz(message: types.Message):
-    await message.answer("📊 Indikator: 250,000 so’m\n📌 Chek yuboring: @forex0042", reply_markup=product_buttons_uz)
-
-@dp.message_handler(lambda m: m.text == "📈 Strategiyalar")
-async def strategies_uz(message: types.Message):
-    await message.answer("📈 Strategiya: 350,000 so’m\n📌 Chek yuboring: @forex0042", reply_markup=product_buttons_uz)
-
-@dp.message_handler(lambda m: m.text == "🎓 Kurslar")
-async def courses_uz(message: types.Message):
-    await message.answer("🎓 Kurs: 3 100 000 so’m\n📌 Chek yuboring: @forex0042", reply_markup=product_buttons_uz)
+@dp.message_handler(lambda m: m.text in ["🎓 Курсы", "🎓 Kurslar"])
+async def courses(message: types.Message):
+    await message.answer("🎓 Курс: 290$\n📎 Чек: @forex0042", reply_markup=product_buttons_ru if "Русский" in message.text else product_buttons_uz)
 
 # О продукте
 @dp.message_handler(lambda m: m.text in ["📦 О продукте", "📦 Mahsulot haqida"])
-async def about_product(message: types.Message):
-    text = (
+async def about(message: types.Message):
+    await message.answer(
         "💼 <b>Что ты получаешь:</b>\n\n"
-        "✅ Сигнальный индикатор (работает в TradingView)\n"
-        "✅ Готовая стратегия\n"
-        "✅ Видеокурс от трейдеров США, Дубай, Малайзия\n"
-        "✅ Постоянная поддержка 24/7\n\n"
-        "🔥 <b>Ранее: 1300$</b>\n"
-        "💰 <b>Сейчас: 290$</b>\n\n"
-        "🚀 Получи доступ: @daromadgeniusbot"
+        "✅ Индикатор\n✅ Стратегия\n✅ Видео-курс\n✅ Поддержка 24/7\n\n"
+        "🔥 <b>Ранее: 1300$</b>\n💰 <b>Сейчас: 290$</b>\n\n"
+        "🚀 Доступ: @daromadgeniusbot", parse_mode="HTML"
     )
-    await message.answer(text, parse_mode="HTML")
 
 # Партнёрка
 @dp.message_handler(lambda m: m.text in ["💼 Партнёрка", "💼 Hamkorlik"])
-async def partner_program(message: types.Message):
-    text = (
-        "🤝 <b>Партнёрская программа:</b>\n\n"
-        "🎁 Пригласи 3 друзей — получи индикатор бесплатно\n"
-        "🔗 Уникальная ссылка (скоро будет)\n"
-        "📩 Связь: @forex0042\n\n"
-        "📊 Статус: Заявка обрабатывается..."
+async def partner(message: types.Message):
+    await message.answer(
+        "🤝 <b>Партнёрка:</b>\n\n🎁 Пригласи 3 друзей — получи индикатор бесплатно\n"
+        "🔗 Реферальная ссылка (скоро)\n"
+        "📩 Связь: @forex0042", parse_mode="HTML"
     )
-    await message.answer(text, parse_mode="HTML")
 
 # Настройки
 @dp.message_handler(lambda m: m.text in ["🛠 Настройки", "🛠 Sozlamalar"])
 async def settings(message: types.Message):
-    user_id = message.from_user.id
     await message.answer(
-        f"⚙️ <b>Настройки</b>\n\n"
-        f"🆔 Ваш ID: <code>{user_id}</code>\n"
-        f"📎 Версия: <b>v1.0 Premium</b>\n"
-        f"💬 Поддержка: @forex0042", parse_mode="HTML"
+        f"⚙️ <b>Настройки</b>\n\n🌐 Язык: авто\n📁 Версия: 1.0\n📅 Дата: {datetime.now().strftime('%Y-%m-%d')}\n👤 ID: <code>{message.from_user.id}</code>",
+        parse_mode="HTML"
     )
 
-# Видео
-@dp.message_handler(lambda m: m.text in ["🎥 Видео"])
-async def show_video(message: types.Message):
-    await message.answer("🎥 Демо видео Trade Genius Bot:\nhttps://youtu.be/example")
-
-# Вопросы
-@dp.message_handler(lambda m: m.text in ["❓ Вопросы", "❓ Savollar"])
-async def faq(message: types.Message):
+# Оплата
+@dp.message_handler(lambda m: m.text in ["💳 Оплатить", "💳 To‘lov"])
+async def pay(message: types.Message):
+    lang = "ru" if "Оплатить" in message.text else "uz"
+    kb = InlineKeyboardMarkup(row_width=1).add(
+        InlineKeyboardButton("🔗 Перейти на Payme", url="https://payme.uz/example"),
+        InlineKeyboardButton("📋 Скопировать карту", callback_data="copy_card"),
+        InlineKeyboardButton("💸 Я оплатил", callback_data=f"paid_{lang}"),
+        InlineKeyboardButton("📩 Поддержка", url="https://t.me/forex0042")
+    )
     await message.answer(
-        "❓ Часто задаваемые вопросы:\n\n"
-        "1. Это работает? — Да, доказано результатами.\n"
-        "2. Где сигналы? — В индикаторе и курсах.\n"
-        "3. Как оплатить? — Через Payme, Click, UzCard.\n"
-        "4. Как получить? — После оплаты доступ откроется.",
+        "💳 Способы оплаты:\n\n"
+        "🇺🇿 Click: +998 95 112 00 42\n"
+        "🌐 Payme: по кнопке ниже\n"
+        "💳 MasterCard: 5477 3300 4324 0989\n\n"
+        "✅ После оплаты отправьте чек в @forex0042",
+        reply_markup=kb
     )
 
-# Запуск
+# Подтверждение оплаты
+@dp.callback_query_handler(lambda c: c.data.startswith("paid_"))
+async def paid_confirm(callback: types.CallbackQuery):
+    lang = "RU" if "ru" in callback.data else "UZ"
+    user = callback.from_user
+    time = datetime.now().strftime("[%Y-%m-%d %H:%M]")
+    log = f"{time} {lang} - {user.full_name} ({user.id}) нажал 'Оплатил'"
+    await bot.send_message(ADMIN_ID, log)
+    await callback.message.answer("📩 Спасибо! Чек отправьте в @forex0042")
+
+# Скопировать карту
+@dp.callback_query_handler(lambda c: c.data == "copy_card")
+async def copy_card(callback: types.CallbackQuery):
+    await callback.message.answer("💳 5477 3300 4324 0989")
+
+# Инлайн кнопки
+@dp.callback_query_handler(lambda c: c.data == "buy_ru")
+async def buy_ru(callback: types.CallbackQuery):
+    await pay(callback.message)
+
+@dp.callback_query_handler(lambda c: c.data == "buy_uz")
+async def buy_uz(callback: types.CallbackQuery):
+    await pay(callback.message)
+
+@dp.callback_query_handler(lambda c: c.data == "back_ru")
+async def back_ru(callback: types.CallbackQuery):
+    await callback.message.answer("🔙 Главное меню", reply_markup=MENU_RU)
+
+@dp.callback_query_handler(lambda c: c.data == "back_uz")
+async def back_uz(callback: types.CallbackQuery):
+    await callback.message.answer("🔙 Asosiy menyu", reply_markup=MENU_UZ)
+
+# ▶️ Запуск
 if __name__ == "__main__":
     executor.start_polling(dp, skip_updates=True)
+
 
 
