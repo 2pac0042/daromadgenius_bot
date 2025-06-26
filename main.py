@@ -4,7 +4,7 @@ from datetime import datetime
 import logging
 import os
 
-API_TOKEN = os.getenv("BOT_TOKEN")
+API_TOKEN = os.getenv("7481276211:AAEcf-ZJGUvmQxb99FpN_9SOQpxfCwwzMHw")
 ADMIN_ID = 6846748073  # Замени на свой Telegram ID
 logging.basicConfig(level=logging.INFO)
 
