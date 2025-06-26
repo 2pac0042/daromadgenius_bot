@@ -7,7 +7,7 @@ import os
 # Получаем токен из переменных окружения
 API_TOKEN = os.getenv("7481276211:AAEcf-ZJGUvmQxb99FpN_9SOQpxfCwwzMHw")
 if not API_TOKEN:
-    raise ValueError("❌ BOT_TOKEN не установлен в переменных окружения Railway")
+    raise ValueError("7481276211:AAEcf-ZJGUvmQxb99FpN_9SOQpxfCwwzMHw")
 
 ADMIN_ID = 6846748073  # Замени на свой Telegram ID
 logging.basicConfig(level=logging.INFO)
@@ -93,15 +93,15 @@ async def pay(message: types.Message):
         "💳 Способы оплаты:\n\n"
         "🇺🇿 Click: +998 95 112 00 42\n"
         "🌐 Payme: нажмите кнопку ниже\n"
-        "💳 MasterCard (Anor Bank):\n"
-        "`5477 3300 4324 0989`\n"
-        "Имя: Anor Bank\n\n"
+        "💳 MasterCard (TBC BANK):\n"
+        "`9860350147273881`\n"
+        "Имя: TBC BANK\n\n"
         "✅ После оплаты отправьте чек: @forex0042" if lang == "ru" else
         "💳 To‘lov usullari:\n\n"
         "🇺🇿 Click: +998 95 112 00 42\n"
         "🌐 Payme: quyidagi tugmani bosing\n"
-        "💳 MasterCard (Anor Bank):\n"
-        "`5477 3300 4324 0989`\n"
+        "💳 MasterCard (TBC BANK):\n"
+        "`9860350147273881`\n"
         "Ism: Anor Bank\n\n"
         "✅ To‘lovdan so‘ng chekni yuboring: @forex0042"
     )
@@ -122,7 +122,7 @@ async def back(callback: types.CallbackQuery):
 
 @dp.callback_query_handler(lambda c: c.data.startswith("copy_card"))
 async def copy_card(callback: types.CallbackQuery):
-    await callback.message.answer("💳 5477 3300 4324 0989")
+    await callback.message.answer("💳 9860350147273881")
 
 @dp.callback_query_handler(lambda c: c.data.startswith("paid_"))
 async def paid_confirm(callback: types.CallbackQuery):
@@ -151,7 +151,7 @@ async def about_product(message: types.Message):
         "✅ Поддержка 24/7\n\n"
         "🔥 <b>Ранее: 1300$</b>\n"
         "💰 <b>Сейчас: 290$</b>\n\n"
-        "🚀 Получи доступ: @daromadgeniusbot",
+        "🚀 Получи доступ: @daromadgenius_bot",
         parse_mode="HTML"
     )
 
