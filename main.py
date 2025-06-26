@@ -5,7 +5,7 @@ import logging
 import os
 
 # Получаем токен из переменных окружения
-API_TOKEN = os.getenv("7481276211:AAEcf-ZJGUvmQxb99FpN_9SOQpxfCwwzMHw")
+API_TOKEN = os.getenv("7481276211:AAEm-dhTn_NyuaAj86xFVWOV2UvPupnggDU")
 if not API_TOKEN:
     raise ValueError("❌ BOT_TOKEN не установлен в переменных окружения Railway")
 
