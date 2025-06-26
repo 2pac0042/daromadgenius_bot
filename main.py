@@ -7,7 +7,7 @@ import os
 # Получаем токен из переменных окружения
 API_TOKEN = os.getenv("7481276211:AAEcf-ZJGUvmQxb99FpN_9SOQpxfCwwzMHw")
 if not API_TOKEN:
-    raise ValueError("7481276211:AAEcf-ZJGUvmQxb99FpN_9SOQpxfCwwzMHw")
+    raise ValueError("❌ BOT_TOKEN не установлен в переменных окружения Railway")
 
 ADMIN_ID = 6846748073  # Замени на свой Telegram ID
 logging.basicConfig(level=logging.INFO)
