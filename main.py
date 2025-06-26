@@ -4,7 +4,7 @@ from datetime import datetime
 import logging
 import os
 
-API_TOKEN = os.getenv("BOT_TOKEN")
+API_TOKEN = os.getenv("7481276211:AAFtUF5vKB4PFYiXZq1wYvOqhq61ox2xVoM")
 if not API_TOKEN:
     raise ValueError("❌ BOT_TOKEN не установлен в переменных окружения Railway")
 
